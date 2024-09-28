@@ -3,6 +3,9 @@
 {% block title %}
 {% endblock %}
 {% block content %}
-this is Home page
+this is Home page<br>
+    {% if user.is_authenticated %}
+    {{ user.username }}
+    {% endif %}
 {% endblock %}
 
