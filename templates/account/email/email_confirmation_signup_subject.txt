@@ -1,1 +1,4 @@
-hello this is a simple email and nothing else
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Please Confirm Your E-mail Addressr ...{% endblocktrans %}
+{% endautoescape %}
