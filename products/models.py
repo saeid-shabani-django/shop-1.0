@@ -29,13 +29,16 @@ class Comment(models.Model):
         ('5','excellent'),
     }
 
-    body = models.TextField()
+    body = models.TextField(verbose_name='enter your comment')
     author = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='comments')
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
-    stars = models.CharField(choices=PRODUCT_STARS)
+    stars = models.CharField(choices=PRODUCT_STARS,blank=True,verbose_name='rate the product')
     product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='comments')
     active = models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        return reverse('product_detail',args=[self.product.id])
 
 
 
