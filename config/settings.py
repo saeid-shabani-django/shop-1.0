@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'accounts',
     'pages',
     'products',
+    'rosetta',
 ]
 
 MIDDLEWARE = [
@@ -132,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 LANGUAGES = [
     ('en','English'),
     ('fa', 'Persian')
