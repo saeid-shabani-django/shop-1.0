@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
-
+from django.utils.translation import gettext as _
 from accounts.models import CustomUser
-
+from django.utils.translation import gettext as _
 
 class Product(models.Model):
     title = models.CharField(max_length=120,verbose_name='title')
@@ -32,7 +32,7 @@ class Comment(models.Model):
         ('5','excellent'),
     }
 
-    body = models.TextField(verbose_name='enter your comment')
+    body = models.TextField(verbose_name=_('enter your comment'))
     author = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='comments')
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
