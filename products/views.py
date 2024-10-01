@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
-
+from django.contrib import messages
 
 
 from products.forms import CommentForm
 from products.models import Product, Comment
+
 
 
 class ProductListView(generic.ListView):
@@ -37,7 +38,10 @@ class CommentCreateView(generic.CreateView):
        obj.author = self.request.user
        product_id = int(self.kwargs['pk'])
        obj.product = get_object_or_404(Product,pk=product_id)
+
        return super().form_valid(form)
+
+
 
 
 

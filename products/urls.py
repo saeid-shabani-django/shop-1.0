@@ -8,4 +8,5 @@ urlpatterns = [
     path('comment/<int:pk>/',views.CommentCreateView.as_view(),name= 'create_comment'),
 
 
+
 ]

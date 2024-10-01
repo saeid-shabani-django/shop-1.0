@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'pages',
     'products',
     'rosetta',
+    'carts',
 ]
 
 MIDDLEWARE = [
@@ -133,21 +134,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'fa-ir'
+LANGUAGE_CODE = 'fa'
 LANGUAGES = [
     ('en','English'),
     ('fa', 'Persian')
 ]
-LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
-]
+# LOCALE_PATHS = [
+#     os.path.join(BASE_DIR, 'locale'),
+# ]
 
-TIME_ZONE = 'Asia/Tehran'
+TIME_ZONE = 'UTC'
 USE_L10N = True
 USE_I18N = True
 
 USE_TZ = True
-
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
