@@ -37,16 +37,22 @@
                                     <span class="price-separator">-</span>
                                     <span class="money old-price text-danger">{{ product.price }} Tooman</span>
                                 </div>
-                                <div class="product-action d-flex align-items-sm-center align-content-center mb--30">
+                                <form action="{% url 'add_to_cart' product.id %}" method="post">
+                                    {% csrf_token %}
+                                     <div class="product-action d-flex align-items-sm-center align-content-center mb--30">
                                     <div class="quantity-wrapper d-flex justify-content-start">
-                                        <div class="quantity">
-                                            <input type="number" class="quantity-input" name="qty" id="qty" value="1" min="1">
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-small btn-bg-red btn-color-white btn-hover-2" onclick="window.location.href='cart.html'">
-                                        اضافه به سبد خرید
+                                   <div class="quantity">
+                                            <input type="number" class="quantity-input" name="quantity" id="qty" value="1" min="1">
+                                        <button type="submit" class="btn btn-small btn-bg-red btn-color-white btn-hover-2">
+                                       {% trans 'add to cart' %}
                                     </button>
-                                </div>
+                                        </div>
+
+                                        </div>
+                                            </div>
+                                </form>
+
+
                                 <div class="product-footer-meta mt-5 pt-5">
                                     <p><span class="m-0">categories</span>
                                         <a href="shop.html">{% trans 'cloth' %}</a>,
@@ -147,45 +153,15 @@
                                                 </li>
                                                 {% endfor %}
                                             </ul>
+                                        {% if  user.is_authenticated %}
                                         <form action="{% url 'create_comment' product.id %}" method="post">
                                             {% csrf_token %}
                                             {{ comment_form.as_p }}
                                             <input type="submit" value="send">
                                         </form>
+                                        {% endif %}
 
-{#                                            <div class="review-form-wrapper">#}
-{#                                                <div class="row">#}
-{#                                                    <div class="border-top py-5 w-100"></div>#}
-{#                                                    <div class="col-lg-8 m-auto">#}
-{#                                                        <span class="reply-title pull-right">نظر خود را بنویسید</span>#}
-{#                                                        <br>#}
-{#                                                        <form action="#" class="form text-right">#}
-{#                                                            <div class="form-notes mb--20">#}
-{#                                                                <p class="my-3"><span class="required">*</span>ایمیل شما برای دیگران نشان داده نمیشود.</p>#}
-{#                                                            </div>#}
-{#                                                            <div class="form__group mb--10">#}
-{#                                                                <label class="form__label d-block" for="email">متن نظر شما<span class="required">*</span></label>#}
-{#                                                                <textarea name="review" id="review" class="form__input form__input--textarea"></textarea>#}
-{#                                                            </div>#}
-{#                                                            <div class="form__group mb--20">#}
-{#                                                                <label class="form__label d-block" for="name">نام شما<span class="required">*</span></label>#}
-{#                                                                <input type="text" name="name" id="name" class="form__input">#}
-{#                                                            </div>#}
-{#                                                            <div class="form__group mb--20">#}
-{#                                                                <label class="form__label d-block" for="email">ایمیل شما<span class="required">*</span></label>#}
-{#                                                                <input type="email" name="email" id="email" class="form__input">#}
-{#                                                            </div>#}
-{#                                                            <div class="form__group">#}
-{#                                                                <div class="form-row">#}
-{#                                                                    <div class="col-12">#}
-{#                                                                        <input type="submit" value="ارسال" class="btn-submit">#}
-{#                                                                    </div>#}
-{#                                                                </div>#}
-{#                                                            </div>#}
-{#                                                        </form>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                            </div>#}
+
                                         </div>
                                     </div>
                                 </div>

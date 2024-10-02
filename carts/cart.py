@@ -1,3 +1,5 @@
+from django.contrib import messages
+
 from products.models import Product
 
 
@@ -10,12 +12,17 @@ class Cart:
             cart = self.session['cart']= {}
         self.cart = cart
 
-    def add(self,product, quantity):
+    def add(self,product, quantity,replace_quantity=False):
         product_id = str(product.id)
-        if not self.cart[product_id]:
-            self.cart[product_id]={'quantity':quantity}
+        if product_id not in self.cart:
+            self.cart[product_id]={'quantity':0}
+        if replace_quantity:
+            self.cart[product_id]['quantity'] = quantity
+
         else:
             self.cart[product_id]['quantity'] += quantity
+
+
         self.save()
 
     def save(self):
@@ -34,10 +41,11 @@ class Cart:
         for product in products:
             cart[str(product.id)]['product_obj'] = product
         for item in cart.values():
+            item['total_price']=item['product_obj'].price*item['quantity']
             yield item
 
     def __len__(self):
-        return len(self.cart.keys())
+        return sum(item['quantity'] for item in self.cart.values())
 
     def clear(self):
         del self.session['cart']
@@ -46,8 +54,14 @@ class Cart:
     def total_price(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
-        total_price = sum(product.price for product in products)
-        
+        va = self.cart.values()
+        total_price = 0
+        for product in va:
+            pr = product.get('product_obj').price
+            quan = product.get('quantity')
+            total_price += pr * quan
+        return total_price
+
 
 
 
