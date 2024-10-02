@@ -11,7 +11,7 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
     price = models.PositiveIntegerField(default=0)
     active = models.BooleanField(default=True)
-    # cover = models.ImageField(upload_to='')
+    image = models.ImageField(upload_to='static/images/',blank=True,null=True)
     def __str__(self):
         return self.title
     def get_absolute_url(self):
