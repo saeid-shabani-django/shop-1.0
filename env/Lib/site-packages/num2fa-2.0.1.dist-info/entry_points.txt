@@ -1,0 +1,2 @@
+[console_scripts]
+num2fa = num2fa.cli:main

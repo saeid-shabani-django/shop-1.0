@@ -1,13 +1,16 @@
+from django.utils import  timezone
+
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext as _
 from accounts.models import CustomUser
 from django.utils.translation import gettext as _
 
+
 class Product(models.Model):
     title = models.CharField(max_length=120,verbose_name='title')
     description = models.TextField()
-    datetime_created = models.DateTimeField(auto_now_add=True)
+    datetime_created = models.DateTimeField(default=timezone.now)
     datetime_modified = models.DateTimeField(auto_now=True)
     price = models.PositiveIntegerField(default=0)
     active = models.BooleanField(default=True)
