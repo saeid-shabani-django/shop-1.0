@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 {% load lower_filter %}
 {% load num2fa %}
+{% load ckeditor %}
+{% load humanize %}
 {% load jalali_tags %}
 {% load static %}
 {% load i18n %}
@@ -35,9 +37,9 @@
                                     {{ product.description }}
                                 </p>
                                 <div class="my-5 py-5 product-price-wrapper mb--25">
-                                    <span class="money text-success">{{product.price| fa_numbers}}Tooman</span>
+                                    <span class="money text-success">{{product.price|intcomma:False }}Tooman</span>
                                     <span class="price-separator">-</span>
-                                    <span class="money old-price text-danger">{{ product.price | fa_numbers }} Tooman</span>
+                                    <span class="money old-price text-danger">{{ product.price | intcomma }} Tooman</span>
                                 </div>
                                 <form action="{% url 'add_to_cart' product.id %}" method="post">
                                     {% csrf_token %}
@@ -132,7 +134,7 @@
                                                                     <div class="review__meta">
                                                                         <strong class="review__author px-4">{{ comment.author.username }}</strong>
                                                                         <span class="review__dash">-</span>
-                                                                        <span class="review__published-date">{{ comment.datetime_created | to_jalali :'%y/%m/%d _ %H:%M:%S' }}</span>
+                                                                        <span class="review__published-date">{{ comment.datetime_created|to_jalali:'%y/%m/%d _ %H:%M:%S' }}</span>
                                                                     </div>
                                                                     <div class="product-rating">
                                                                         <div class="m-0 star-rating star-five">
@@ -142,7 +144,7 @@
                                                                 </div>
                                                             </div>
                                                             <p class="review__description text-right px-4">
-                                                               {{ comment.body }}
+                                                               {{ comment.body|ckeditor }}
                                                             </p>
                                                         </div>
                                                     </div>

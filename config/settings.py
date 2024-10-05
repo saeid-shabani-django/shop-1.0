@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'jalali_date',
     'django_num2fa',
+    'django.contrib.humanize',
+    'ckeditor',
 
     # we install these apps
     'accounts',
