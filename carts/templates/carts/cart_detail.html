@@ -20,12 +20,12 @@
                                                 <thead>
                                                     <tr>
                                                         <th>&nbsp;</th>
-                                                        <th>عکس محصول</th>
-                                                        <th class="text-left">نام محصول</th>
-                                                        <th>قیمت</th>
-                                                        <th>مقدار</th>
+                                                        <th>{% trans 'pricture of product' %}</th>
+                                                        <th class="text-left">{% trans 'name of the product' %}</th>
+                                                        <th>{% trans 'price' %}</th>
+                                                        <th>{% trans 'quantity' %}</th>
 
-                                                        <th>مجموع</th>
+                                                        <th>{% trans 'sum' %}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -33,7 +33,7 @@
                                                     <tr>
                                                         <td class="product-remove text-left"><a href="{% url 'remove' item.product_obj.id %}"><i class="flaticon flaticon-cross"></i></a></td>
                                                         <td class="product-thumbnail text-left">
-                                                            <img src="assets/img/products/prod-10-70x88.jpg" alt="Product Thumnail">
+                                                            <img src='{{ item.product_obj.image.url }}' alt="Product Thumnail">
                                                         </td>
                                                         <td class="product-name wide-column">
                                                             <h3>
@@ -42,7 +42,7 @@
                                                         </td>
                                                         <td class="product-price">
                                                             <span class="product-price-wrapper">
-                                                                <span class="money">{{item.product_obj.price}} تومان</span>
+                                                                <span class="money">{{item.product_obj.price}} {% trans '$' %}</span>
                                                             </span>
                                                         </td>
                                                         <td class="product-quantity">
@@ -67,7 +67,7 @@
 
                                                         <td class="product-total-price">
                                                             <span class="product-price-wrapper">
-                                                                <span class="money">{{ item.total_price }} تومان</span>
+                                                                <span class="money">{{ item.total_price }} {% trans '$' %}</span>
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -79,7 +79,13 @@
                                 </div>
                                 <div class="row no-gutters border-top pt--20 mt--20">
                                     <div class="col-sm-6 text-sm-right">
-                                        <button type="submit" class="cart-form__btn">خالی کردن سبد خرید</button>
+                                        <form method="POST" action="{% url 'emptythecart' %}">
+                                            {% csrf_token %}
+
+                                           <button type="submit" class="cart-form__btn">{% trans 'empty the cart' %}</button>
+
+                                        </form>
+
                                     </div>
                                 </div>
 
@@ -87,23 +93,23 @@
                         <div class="col-lg-4">
                             <div class="cart-collaterals">
                                 <div class="cart-totals">
-                                    <h5 class="font-size-14 font-bold mb--15">مجموع</h5>
+                                    <h5 class="font-size-14 font-bold mb--15">{% trans 'sum' %}</h5>
                                     <div class="cart-calculator">
 
                                         <div class="cart-calculator__item order-total">
                                             <div class="cart-calculator__item--head">
-                                                <span>جمع کل</span>
+                                                <span>{% trans 'total price' %}</span>
                                             </div>
                                             <div class="cart-calculator__item--value">
                                                 <span class="product-price-wrapper">
-                                                    <span class="money">{{ carts.total_price }} تومان</span>
+                                                    <span class="money">{{ carts.total_price }} {% trans '$' %}</span>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="checkout.html" class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2">
-                                    ثبت سفارش
+                                <a href="{% url 'order' %}" class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2">
+                                    {% trans 'register order' %}
                                 </a>
                             </div>
                         </div>

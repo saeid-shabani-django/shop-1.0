@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 {% load lower_filter %}
 {% load num2fa %}
-{% load ckeditor %}
+
 {% load humanize %}
 {% load jalali_tags %}
 {% load static %}
@@ -144,7 +144,7 @@
                                                                 </div>
                                                             </div>
                                                             <p class="review__description text-right px-4">
-                                                               {{ comment.body|ckeditor }}
+                                                               {{ comment.body }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -281,16 +281,20 @@
                                 <a href="" class="reset_variations">Clear</a>
                             </form>
                             <div class="product-action d-flex flex-sm-row flex-column align-items-sm-center align-items-start mb--30">
-                                <div class="quantity-wrapper d-flex align-items-center mr--30 mr-xs--0 mb-xs--30">
+                                <form action="{% url 'add_to_cart' product.id %}" method="post">
+                                    {% csrf_token %}
+                                       <div class="quantity-wrapper d-flex align-items-center mr--30 mr-xs--0 mb-xs--30">
                                     <label class="quantity-label" for="quick-qty">Quantity:</label>
                                     <div class="quantity">
                                         <input type="number" class="quantity-input" name="qty" id="quick-qty" value="1" min="1">
-                                    </div>
+
                                 </div>
-                                <button type="button" class="btn btn-small btn-bg-red btn-color-white btn-hover-2" onclick="window.location.href='cart.html'">
-                                    Add To Cart
+                                <button type="button" class="btn btn-small btn-bg-red btn-color-white btn-hover-2" >
+                                   {% trans 'add to cart' %}
                                 </button>
                             </div>
+                                </form>
+
                             <div class="product-footer-meta">
                                 <p><span>Category:</span>
                                     <a href="shop.html">Full Sweater</a>,

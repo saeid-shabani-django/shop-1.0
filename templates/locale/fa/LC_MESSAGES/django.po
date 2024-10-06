@@ -86,7 +86,7 @@ msgstr ""
 
 #: .\account\email_confirm.html:7 .\account\email_confirm.html:11
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "تایید ادرس ایمیل"
 
 #: .\account\email_confirm.html:17
 #, python-format
@@ -97,7 +97,7 @@ msgstr ""
 
 #: .\account\email_confirm.html:25
 msgid "Confirm"
-msgstr ""
+msgstr "تایید"
 
 #: .\account\email_confirm.html:31
 #, python-format

@@ -10,7 +10,7 @@ class Order(models.Model):
     is_paid = models.BooleanField(default=False)
     datetime_created = models.DateTimeField(auto_now_add=True)
     datatime_modified = models.DateTimeField(auto_now=True)
-    add_note = models.TextField(blank=True)
+    add_note = models.TextField(blank=True,null=True)
 
     def __str__(self):
         return f'{self.id}'
@@ -19,7 +19,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='items')
     product = models.ForeignKey('products.Product',on_delete=models.CASCADE,related_name='items')
     quantity = models.PositiveIntegerField(default=1)
-    price = models.ForeignKey('products.Product',on_delete=models.CASCADE)
+    price = models.PositiveIntegerField()
 
     def __str__(self):
         return f'OrderItem: {self.id} , order: {self.order.id}'
