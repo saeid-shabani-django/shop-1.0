@@ -33,6 +33,8 @@ def show_order(request):
         request.user.first_name = main_form.first_name
         request.user.last_name = main_form.last_name
         request.user.save()
+        request.session['order_id'] = main_form.id
+        return redirect('payment_process')
 
 
 

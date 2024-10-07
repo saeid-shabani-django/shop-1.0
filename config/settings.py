@@ -220,7 +220,7 @@ JALALI_DATE_DEFAULTS = {
 
 
 
-
+django_merchant_id = env('django_merchant_id')
 
 
 

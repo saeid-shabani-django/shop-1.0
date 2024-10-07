@@ -11,9 +11,17 @@ class Order(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
     datatime_modified = models.DateTimeField(auto_now=True)
     add_note = models.TextField(blank=True,null=True)
+    authority = models.CharField(max_length=255,blank=True)
+    ref_id = models.CharField(max_length=255,blank=True)
 
     def __str__(self):
         return f'{self.id}'
+
+    def get_total_price(self):
+        result =0
+        for item in self.items:
+            result += item.quanityty * item.price
+        return result
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='items')
